@@ -16,12 +16,19 @@ Feature: Shout
     When Sean shouts "free bagels at Sean's"
     Then Lucy should hear Sean's message
 
-  Scenario: Listener hears a different message
-    When Sean shouts "Free coffee!"
-    Then Lucy should hear Sean's message
 
     Rule: Shouts should only be heard if listener is within range
 
         Scenario: Lister within range
+          Given the range is 100
+          And a person named Sean is located at 0
+          And a person named Lucy is located at 50
+          When Sean shouts "free bagels at Sean's"
+          Then Lucy should hear Sean's message
 
           Scenario: Listener is out of range
+            Given the range is 100
+            And a person named Sean is located at 0
+            And a person named Larry is located at 150
+            When Sean shouts "free bagels at Sean's"
+            Then Lucy should not hear Sean's message
