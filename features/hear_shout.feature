@@ -21,14 +21,20 @@ Feature: Shout
 
         Scenario: Lister within range
           Given the range is 100
-          And a person named Sean is located at 0
-          And a person named Lucy is located at 50
-          When Sean shouts "free bagels at Sean's"
+          And a person named Sean is located at
+            |name| location|
+            |Sean|0        |
+            |Lucy|50       |
+          When Sean shouts
           Then Lucy should hear Sean's message
 
           Scenario: Listener is out of range
             Given the range is 100
             And a person named Sean is located at 0
-            And a person named Larry is located at 150
-            When Sean shouts "free bagels at Sean's"
+              |name | location|
+              |Sean |0        |
+              |Larry|150      |
+            When Sean shouts:
+              |Free bagels|
+              |Free coffee|
             Then Lucy should not hear Sean's message
